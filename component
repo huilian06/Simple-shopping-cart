@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue 3 Basics</title>
+      <style type="text/css">
+          [v-cloak]{
+            display: none;
+          }
+      </style>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+          <login-form />
+
+            <hr />
+
+       
+        </div>
+
+        <script src="https://unpkg.com/vue@next"></script>
+        <script>
+            let app = Vue.createApp({
+                data: function() {
+                    return {
+                        greeting: 'hi',
+                        isVisible: false,
+                        isVisible2: false
+                    }
+                },
+                methods:{
+                    toggleBox(){
+                        this.isVisible2=!this.isVisible2
+                    }
+
+                }
+            })
+
+            app.component('login-form',{
+                template:`
+                <form @submit.prevent="handleSubmit">
+                <h1>{{title}}</h1>
+                <input type="email" v-model="email" />
+                <input type="password" v-model="password"/>
+                <button> Log In </button>
+                </form>
+
+                `,
+                data(){
+                    return{
+                        title:'Login Form',
+                        email:'',
+                        password:''
+                    }
+                },
+                methods:{
+                    handleSubmit(){
+                        console.log(this.email,this.password)
+                    }
+                }
+             
+
+            })
+
+            app.mount('#app')
+        </script>
+    </body>
+</html>
